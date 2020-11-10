@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="User.SDA3toHL7">
+<Super>Ens.BusinessProcess</Super>
+
+<Parameter name="SETTINGS">
+<Default><![CDATA[TargetConfigName:Basic:selector?context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId},TransformFile:Basic]]></Default>
+</Parameter>
+
+<Property name="TargetConfigName">
+<Type>Ens.DataType.ConfigName</Type>
+<InitialExpression>"RoutingEnginetest1"</InitialExpression>
+</Property>
+
+<Method name="OnRequest">
+<Description>
+Transforms an HL7 message to SDA, an internal healthcare format for InterSystems IRIS for Health.</Description>
+<FormalSpec>pRequest:EnsLib.HL7.Message,*pResponse:Ens.Response</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set tSC = $$$OK
+	try {
+         set tSC = ##class(HS.Gateway.HL7.HL7ToSDA3).GetSDA(pRequest,.tSDA)
+         //wafik ajout
+         set xxl2 = ##class(EnsLib.EDI.XML.Document).%New(tSDA)
+         set xxl = ##class(Ens.StreamContainer).%New(tSDA)
+         $$$LOGINFO(xxl.Type)
+         set tSC = ..SendRequestSync(..TargetConfigName,xxl2,.pResponse)
+	} catch ex {
+		set tSC = ex.AsStatus()
+	}
+	quit tSC
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Category>error</Category>
+<Content><![CDATA[
+
+
+
+
+Class User.SDA3toHL7 Extends Ens.BusinessProcess
+{
+]]></Content>
+</UDLText>
+
+<Parameter name="SETTINGS">
+<Default><![CDATA[TargetConfigName:Basic:selector?context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId},TransformFile:Basic]]></Default>
+</Parameter>
+
+<Property name="TargetConfigName">
+<Type>Ens.DataType.ConfigName</Type>
+<InitialExpression>"RoutingEnginetest1"</InitialExpression>
+</Property>
+
+<Method name="OnRequest">
+<Description>
+Transforms an HL7 message to SDA, an internal healthcare format for InterSystems IRIS for Health.</Description>
+<FormalSpec>pRequest:EnsLib.HL7.Message,*pResponse:Ens.Response</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set tSC = $$$OK
+	try {
+         set tSC = ##class(HS.Gateway.HL7.HL7ToSDA3).GetSDA(pRequest,.tSDA)
+         //wafik ajout
+         set xxl2 = ##class(EnsLib.EDI.XML.Document).%New(tSDA)
+         set xxl = ##class(Ens.StreamContainer).%New(tSDA)
+         $$$LOGINFO(xxl.Type)
+         set tSC = ..SendRequestSync(..TargetConfigName,xxl2,.pResponse)
+	} catch ex {
+		set tSC = ex.AsStatus()
+	}
+	quit tSC
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Category>error</Category>
+<Content><![CDATA[
+
+}
+]]></Content>
+</UDLText>
+</Class>
+</Export>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="User.SDA3toHL7Final">
+<Super>Ens.BusinessProcess</Super>
+
+<Parameter name="SETTINGS">
+<Default><![CDATA[TargetConfigName:Basic:selector?context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId},TransformFile:Basic]]></Default>
+</Parameter>
+
+<Property name="TargetConfigName">
+<Type>Ens.DataType.ConfigName</Type>
+<InitialExpression>"HS.FHIR.DTL.Util.HC.SDA3.FHIR.Process"</InitialExpression>
+</Property>
+
+<Method name="OnRequest">
+<Description>
+Transforms an HL7 message to SDA, an internal healthcare format for InterSystems IRIS for Health.</Description>
+<FormalSpec>pRequest:EnsLib.EDI.XML.Document,*pResponse:Ens.Response</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set tSC = $$$OK
+	try {
+	
+         //set xxl2 = ##class(EnsLib.EDI.XML.Document).%New(pRequest)     
+         //$$$LOGINFO("lol: "_xxl2)
+         
+         set tSC = ..SendRequestSync(..TargetConfigName,pRequest,.pResponse)
+	} catch ex {
+		set tSC = ex.AsStatus()
+	}
+	quit tSC
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Category>error</Category>
+<Content><![CDATA[
+
+
+
+
+
+
+Class User.SDA3toHL7Final Extends Ens.BusinessProcess
+{
+]]></Content>
+</UDLText>
+
+<Parameter name="SETTINGS">
+<Default><![CDATA[TargetConfigName:Basic:selector?context={Ens.ContextSearch/ProductionItems?targets=1&productionName=@productionId},TransformFile:Basic]]></Default>
+</Parameter>
+
+<Property name="TargetConfigName">
+<Type>Ens.DataType.ConfigName</Type>
+<InitialExpression>"HS.FHIR.DTL.Util.HC.SDA3.FHIR.Process"</InitialExpression>
+</Property>
+
+<Method name="OnRequest">
+<Description>
+Transforms an HL7 message to SDA, an internal healthcare format for InterSystems IRIS for Health.</Description>
+<FormalSpec>pRequest:EnsLib.EDI.XML.Document,*pResponse:Ens.Response</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set tSC = $$$OK
+	try {
+	
+         //set xxl2 = ##class(EnsLib.EDI.XML.Document).%New(pRequest)     
+         //$$$LOGINFO("lol: "_xxl2)
+         
+         set tSC = ..SendRequestSync(..TargetConfigName,pRequest,.pResponse)
+	} catch ex {
+		set tSC = ex.AsStatus()
+	}
+	quit tSC
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Category>error</Category>
+<Content><![CDATA[
+
+}
+]]></Content>
+</UDLText>
+</Class>
+</Export>

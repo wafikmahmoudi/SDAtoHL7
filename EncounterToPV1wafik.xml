@@ -46,7 +46,7 @@
 <assign value='source.{/Encounter/AdmissionType/Code}' property='target.{4}' action='set' />
 <assign value='source.{/Encounter/AttendingClinicians/CareProvider/Name/FamilyName}' property='target.{7.2}' action='set' />
 <assign value='source.{/Encounter/AttendingClinicians/CareProvider/Name/GivenName}' property='target.{7.3}' action='set' />
-<assign value='"testtttttttttttttttttttttttttttt"' property='target.{7.5}' action='set' />
+<assign value='source.{/Encounter/AttendingClinicians/CareProvider/Name/NameSuffix}' property='target.{7.5}' action='set' />
 <code>
 <![CDATA[ 
  #;

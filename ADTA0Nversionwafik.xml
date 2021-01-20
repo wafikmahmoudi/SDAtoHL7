@@ -57,7 +57,7 @@
  #; 
 ]]]]><![CDATA[></code>
 <assign value='##class(EnsLib.EDI.XML.Document).ImportFromString("&lt;Patient&gt;"_source.{Patient}_"&lt;/Patient&gt;")' property='tPatient' action='set' />
-<subtransform class='HS.Gateway.SDA3.SDA3ToHL7.SubTransform.PatientToPID' targetObj='target.{PID}' sourceObj='tPatient' />
+<subtransform class='HS.Gateway.SDA3.SDA3ToHL7.SubTransform.PatientToPIDwafik' targetObj='target.{PID}' sourceObj='tPatient' />
 <foreach property='target.{PID:3()}' key='k1' >
 <annotation>Change MRN to MR</annotation>
 <if condition='target.{PID:3(k1).5}="MRN"' >
@@ -77,10 +77,9 @@
  #; All this is just removing un-used parts to make comparisons easier
  #; Not strictly necessary
 ]]]]><![CDATA[></code>
-<assign value='"wafikmahmoudi"' property='target.{PID:5(1).7}' action='set' />
-<assign value='""' property='target.{PID:15}' action='set' />
-<assign value='""' property='target.{PID:16}' action='set' />
-<assign value='""' property='target.{PID:17}' action='set' />
+<assign value='""' property='target.{PID:15}' action='set' disabled='1' />
+<assign value='""' property='target.{PID:16}' action='set' disabled='1' />
+<assign value='""' property='target.{PID:17}' action='set' disabled='1' />
 <if condition='$Length(target.{PID:22})' >
 <true>
 <assign value='target.{PID:22}' property='target.{PID:33}' action='set' />
